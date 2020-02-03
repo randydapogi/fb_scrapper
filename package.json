@@ -1,0 +1,10 @@
+{
+  "name": "facebook_scrapper",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "msexcel-builder": "0.0.2",
+    "puppeteer": "^2.1.0"
+  }
+}
