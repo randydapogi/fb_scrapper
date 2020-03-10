@@ -2,13 +2,13 @@ const puppeteer = require("puppeteer");
 const fs = require("fs");
 const cheerio = require("cheerio");
 
+const { username, password } = require('./constants')
+
 const excelbuilder = require("msexcel-builder");
 
 (async () => {
-  const username = "username";
-  const password = "password";
 
-  const post_id = "770990920045959";
+  const post_id = "10163390472345657";
   const filename = "fb_scrape.xls";
 
   const post_link = `https://m.facebook.com/${post_id}`;
@@ -40,19 +40,19 @@ const excelbuilder = require("msexcel-builder");
     console.log("Next", currentLength);
     try {
       await page.waitForSelector(`[id=see_next_${post_id}]`, {
-        timeout: 3000
+        timeout: 10000
       });
       await page.click(`[id=see_next_${post_id}]`);
-      await page.waitFor(3000);
+      await page.waitFor(10000);
     } catch (error) {
       // console.log("The element didn't appear.")
       // break
       try {
         await page.waitForSelector(`[id=see_prev_${post_id}]`, {
-          timeout: 3000
+          timeout: 10000
         });
         await page.click(`[id=see_prev_${post_id}]`);
-        await page.waitFor(3000);
+        await page.waitFor(10000);
       } catch (error) {
         // console.log("The element didn't appear.")
         break;
@@ -77,7 +77,7 @@ const excelbuilder = require("msexcel-builder");
 
   var rows = [];
 
-  $("._2a_i").each(function(i, elem) {
+  $("._2a_i").each(function (i, elem) {
     const temp = cheerio.load($(this).html());
 
     const commentor = temp("._2b05").text();
